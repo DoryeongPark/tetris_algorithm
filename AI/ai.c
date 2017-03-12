@@ -3,6 +3,7 @@
 
 #include <string.h>
 #include <windows.h>
+#include <stdio.h>
 
 #define DECLSPEC_EXPORT __declspec(dllexport)
 #define WINAPI __stdcall
@@ -225,28 +226,76 @@ char* WINAPI Name()
 	return gName;
 }
 
-/*
- * board角寧몸boardW*boardH낀똑痰01莉냥돨俚륜눔，覩듐黨璘苟실，邱契빈죗。
- * 절흔8*3돨끝뒈茄셥近榴：
- * 00000000
- * 00011001
- * 01111111
- * 橙꽝鑒board돨코휭槨："011111110001100100000000"。
- *
- * Piece꽝鑒賈痰俚륜 OISZLJT 섟왕목깊刻렘욥近榴。
- * nextPiece槨' '珂깊刻轟渡응。
- * curR角렘蕨날蕨，1角놓迦렘蕨，2角쾀珂濾90똑，3角180똑，4角糠珂濾90똑。
- * curX,curY돨麟깃，角鹿뎠품욥4*4앤黎돨鑒뒤랗契，塘鑒뒤랗죗槨샘硫，
- *     璘苟실槨x=1,y=1；塘苟실槨x=boardW,y=1；璘실槨x=1,y=boardH
- *     야竟렘욥近榴꽝敦寧섬커쩌苟돨pieces_orientations.jpg
- *     칵훰놓迦麟깃槨 curY==boardH-1, curX==boardW/2+1
- *
- * bestX,bestRotation 痰黨럿쀼離膽貫零，宅curX,curR돨방橙宮谿。
- *
- * 鬧雷：렘욥꾸鱗늴埼방땍槨邱旗瘻，疼틱盧，離빈렴苟。
- *       흼櫓쇌唐羸뎡랍AI넋埼청唐털뙤橙삔돔鈴댄轎겠렴。
- *       맡변鑒瞳놔君劤렘욥돨珂빅굳딧痰，寧몸렘욥딧痰寧늴。
- */
+typedef struct Mask {
+	int width;
+	int height;
+	char* filter;
+} Mask;
+
+Mask make_mask(int width, int height, char* content) {
+
+	Mask mask;
+	mask.width = width;
+	mask.height = height;
+	mask.filter = malloc(sizeof(char) * width * height);
+	strcpy(mask.filter, content);
+
+	return mask;
+}
+
+int is_fit(int standard, int left, int right, int top, char* board, Mask mask) {
+
+	if (left + right + 1 != mask.width) {
+		printf("Width doesn't fit with mask's\n");
+		return 0;
+	}
+
+	if (top != mask.height) {
+		printf("Height doesn't fit with mask's\n");
+		return 0;
+	}
+
+	int count = (left + right + 1) * top;
+	int inserter = 0;
+	int result = 1;
+
+	while (top != 0) {
+		--top;
+		for (int i = standard - left; i <= standard + right; ++i) {
+			if (board[i] != mask.filter[inserter++]) {
+				result = 0;
+				goto inspection_end_point;
+			}
+		}
+		standard += 10;
+	}
+
+	inspection_end_point:
+
+	return result;
+}
+
+void make_decision_i(int* bestX, int* bestRotation, char* board) {
+
+	Mask flat_mask = make_mask(4, 2, "00000000");
+
+	for (int i = 0; i < 20; ++i) {
+		for (int j = 0 + 2; j < 10 - 1; ++j) {
+			int standard = i * 10 + j;
+			if (is_fit(standard, 2, 1, 2, board, flat_mask)) {
+				*bestX = j + 1;
+				printf("Fit point found\n");
+				goto decision_i_end_point;
+			}
+		}
+	}
+
+	
+
+	decision_i_end_point:;
+}
+
+
 int AI(int boardW, int boardH,
 		char board[],
 		char curPiece,
@@ -256,26 +305,20 @@ int AI(int boardW, int boardH,
 		int* bestX, int* bestRotation)
 {
 	*bestX = 1;
-	*bestRotation = 3;
+	*bestRotation = 1;
+
+	switch (curPiece) {
+	case 'I':
+		make_decision_i(bestX, bestRotation, board);
+		break;
+	default:
+		break;
+	}
 
 	return 0;
 }
 
-/*
- * path 痰黨쌈澗꾸鱗법넋깻럿쀼，꾸鱗俚륜섞：
- *      'l': 璘盧寧목
- *      'r': 塘盧寧목
- *      'd': 苟盧寧목
- *      'L': 璘盧돕庫
- *      'R': 塘盧돕庫
- *      'D': 苟盧돕뒀（뎃꼇瀾，옵셨崎盧땡）
- *      'z': 쾀珂濾旗瘻
- *      'c': 糠珂濾旗瘻
- * 俚륜눔칫棺狼속'\0'，깊刻쭝뒈꾸鱗（샀袒슉쭝）
- *
- * 굶변鑒連넣훨雷쨌쓺꾸鱗，흼꼇矜狼늪변鑒怜拳賈痰충寧몸돨뺐，橙딜굶변鑒섦옵
- * 흼닸瞳굶변鑒，橙품寧몸변鑒꼇삔굳딧痰
- */
+
 DECLSPEC_EXPORT
 int WINAPI AIPath(int boardW, int boardH,
 		char board[],
@@ -285,8 +328,6 @@ int WINAPI AIPath(int boardW, int boardH,
 		char nextPiece,
 		char path[] )
 {
-	// 鹿苟늪뙈덜쯤槨쇗휭覩쌈왯賈痰，흼꼇矜狼옵鹿뇜
-	//if (0)
 	{
 		int bestX = 0;
 		int bestRotation = 1;
@@ -319,6 +360,9 @@ int WINAPI AIPath(int boardW, int boardH,
 
 	return 1;
 }
+
+
+
 
 #ifdef __cplusplus
 }

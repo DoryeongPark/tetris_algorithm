@@ -1,0 +1,7 @@
+﻿  dllmain.c
+  ai.c
+  코드를 생성하고 있습니다...
+ai.obj : warning LNK4075: '/EDITANDCONTINUE'이(가) '/SAFESEH' 사양으로 인해 무시됩니다.
+     C:\Users\zzada\Documents\GitHub\tetris\StandardTetrisMSVC2005\Debug\AI.lib 라이브러리 및 C:\Users\zzada\Documents\GitHub\tetris\StandardTetrisMSVC2005\Debug\AI.exp 개체를 생성하고 있습니다.
+  AI.vcxproj -> C:\Users\zzada\Documents\GitHub\tetris\StandardTetrisMSVC2005\Debug\AI.dll
+  AI.vcxproj -> C:\Users\zzada\Documents\GitHub\tetris\StandardTetrisMSVC2005\Debug\AI.pdb (Full PDB)

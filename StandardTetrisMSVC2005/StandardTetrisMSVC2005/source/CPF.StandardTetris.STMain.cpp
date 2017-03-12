@@ -265,7 +265,7 @@ namespace CPF
 			AllocConsole(); //Console Window for Debugging
 			freopen("CONIN$", "r", stdin);
 			freopen("CONOUT$", "w", stdout);
-			freopen("CONOUT$", "w", stderr);		
+			freopen("CONOUT$", "w", stderr);
 
 			HWND_Window = 
 				::CreateWindow
@@ -335,7 +335,7 @@ namespace CPF
 
 			int done = 0;
 			int messageCount = 0;
-
+			
 			while( ! done )
 			{
 				int message = 0;

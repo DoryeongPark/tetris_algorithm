@@ -1,9 +1,42 @@
-﻿  CPF.StandardTetris.STMain.cpp
+﻿  CPF.StandardTetris.STVideoProcessing.cpp
+  CPF.StandardTetris.STVideoCapture.cpp
+  CPF.StandardTetris.STUserInterface.cpp
+  CPF.StandardTetris.STTime.cpp
+  CPF.StandardTetris.STStrategyUserDefinedDll.cpp
+  CPF.StandardTetris.STStrategyRogerLLimaLaurentBercotSebastienBlondeelOnePiece1996.cpp
+  CPF.StandardTetris.STStrategyPierreDellacherieOnePiece2003.cpp
+  CPF.StandardTetris.STStrategyManager.cpp
+  CPF.StandardTetris.STStrategyColinFaheyTwoPiece2003.cpp
+  CPF.StandardTetris.STStrategy.cpp
+  CPF.StandardTetris.STRS232.cpp
+  CPF.StandardTetris.STRandom.cpp
+  CPF.StandardTetris.STPieceSequence.cpp
+  CPF.StandardTetris.STPiece.cpp
+  CPF.StandardTetris.STOpenGLFont.cpp
+  CPF.StandardTetris.STMD5.cpp
+c:\users\zzada\documents\github\tetris\standardtetrismsvc2005\standardtetrismsvc2005\source\cpf.standardtetris.stmd5.cpp(570): warning C4477: 'printf' : 서식 문자열 '%ld'에 'long' 형식의 인수가 필요하지만 variadic 인수 1의 형식이 'time_t'입니다.
+  c:\users\zzada\documents\github\tetris\standardtetrismsvc2005\standardtetrismsvc2005\source\cpf.standardtetris.stmd5.cpp(570): note: 서식 문자열에서 '%lld'을(를) 사용하는 것이 좋습니다.
+  c:\users\zzada\documents\github\tetris\standardtetrismsvc2005\standardtetrismsvc2005\source\cpf.standardtetris.stmd5.cpp(570): note: 서식 문자열에서 '%I64d'을(를) 사용하는 것이 좋습니다.
+  CPF.StandardTetris.STMain.cpp
 c:\users\zzada\documents\github\tetris\standardtetrismsvc2005\standardtetrismsvc2005\source\cpf.standardtetris.stmain.cpp(266): warning C4996: 'freopen': This function or variable may be unsafe. Consider using freopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
   c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\stdio.h(240): note: 'freopen' 선언을 참조하십시오.
 c:\users\zzada\documents\github\tetris\standardtetrismsvc2005\standardtetrismsvc2005\source\cpf.standardtetris.stmain.cpp(267): warning C4996: 'freopen': This function or variable may be unsafe. Consider using freopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
   c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\stdio.h(240): note: 'freopen' 선언을 참조하십시오.
 c:\users\zzada\documents\github\tetris\standardtetrismsvc2005\standardtetrismsvc2005\source\cpf.standardtetris.stmain.cpp(268): warning C4996: 'freopen': This function or variable may be unsafe. Consider using freopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
   c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\stdio.h(240): note: 'freopen' 선언을 참조하십시오.
-  StandardTetrisMSVC2005.vcxproj -> C:\Users\zzada\Documents\GitHub\Tetris\StandardTetrisMSVC2005\Debug\StandardTetrisMSVC2005.exe
-  StandardTetrisMSVC2005.vcxproj -> C:\Users\zzada\Documents\GitHub\Tetris\StandardTetrisMSVC2005\Debug\StandardTetrisMSVC2005.pdb (Full PDB)
+  CPF.StandardTetris.STGameState.cpp
+  CPF.StandardTetris.STGameFile.cpp
+  CPF.StandardTetris.STGameDrawing.cpp
+  코드를 생성하고 있습니다...
+  컴파일하고 있습니다...
+  CPF.StandardTetris.STGame.cpp
+  CPF.StandardTetris.STFileList.cpp
+  CPF.StandardTetris.STFile.cpp
+  CPF.StandardTetris.STEngine.cpp
+  CPF.StandardTetris.STDateTime.cpp
+  CPF.StandardTetris.STConsole.cpp
+  CPF.StandardTetris.STBoard.cpp
+  코드를 생성하고 있습니다...
+CPF.StandardTetris.STBoard.obj : warning LNK4075: '/EDITANDCONTINUE'이(가) '/SAFESEH' 사양으로 인해 무시됩니다.
+  StandardTetrisMSVC2005.vcxproj -> C:\Users\zzada\Documents\GitHub\tetris\StandardTetrisMSVC2005\Debug\StandardTetrisMSVC2005.exe
+  StandardTetrisMSVC2005.vcxproj -> C:\Users\zzada\Documents\GitHub\tetris\StandardTetrisMSVC2005\Debug\StandardTetrisMSVC2005.pdb (Full PDB)

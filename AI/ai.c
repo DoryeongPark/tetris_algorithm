@@ -229,7 +229,7 @@ char* WINAPI Name()
 typedef struct Mask {
 	int width;
 	int height;
-	char* filter;
+	char* kernal;
 } Mask;
 
 Mask make_mask(int width, int height, char* content) {
@@ -237,8 +237,8 @@ Mask make_mask(int width, int height, char* content) {
 	Mask mask;
 	mask.width = width;
 	mask.height = height;
-	mask.filter = malloc(sizeof(char) * width * height);
-	strcpy(mask.filter, content);
+	mask.kernal = malloc(sizeof(char) * width * height);
+	strcpy(mask.kernal, content);
 
 	return mask;
 }
@@ -262,7 +262,10 @@ int is_fit(int standard, int left, int right, int top, char* board, Mask mask) {
 	while (top != 0) {
 		--top;
 		for (int i = standard - left; i <= standard + right; ++i) {
-			if (board[i] != mask.filter[inserter++]) {
+			char comp = '1';
+			if (standard / 10 == i / 10)
+				comp = board[i];
+			if (comp != mask.kernal[inserter++]) {
 				result = 0;
 				goto inspection_end_point;
 			}
@@ -275,22 +278,51 @@ int is_fit(int standard, int left, int right, int top, char* board, Mask mask) {
 	return result;
 }
 
+int get_max_height(char* board) {
+
+	int max_height = 0;
+	for (int i = 0; i < 20; ++i) {
+		for (int j = 0; j < 10; ++j)
+			if (board[i * 10 + j] == '1') {
+				++max_height;
+				break;
+			}
+	}
+	return max_height;
+}
+
 void make_decision_i(int* bestX, int* bestRotation, char* board) {
 
-	Mask flat_mask = make_mask(4, 2, "00000000");
+	*bestRotation = 1;
 
-	for (int i = 0; i < 20; ++i) {
-		for (int j = 0 + 2; j < 10 - 1; ++j) {
+	int max_height = get_max_height(board);
+	Mask flat_mask1 = make_mask(4, 2, "00000000");
+
+	for (int i = 0; i < 1; ++i) 
+		for (int j = 0; j < 10; ++j) {
 			int standard = i * 10 + j;
-			if (is_fit(standard, 2, 1, 2, board, flat_mask)) {
+			if (is_fit(standard, 2, 1, 2, board, flat_mask1)) {
 				*bestX = j + 1;
-				printf("Fit point found\n");
+				printf("Fit Point Found - I1\n");
 				goto decision_i_end_point;
 			}
 		}
-	}
-
 	
+
+	Mask flat_mask2 = make_mask(4, 3, "111100000000");
+
+	for(int i = 0; i < max_height; ++i)
+		for (int j = 0; j < 10; ++j) {
+			int standard = i * 10 + j;
+			if (is_fit(standard, 2, 1, 3, board, flat_mask2)) {
+				*bestX = j + 1;
+				printf("Fit Point Found - I1\n");
+				goto decision_i_end_point;
+			}
+		}
+
+	*bestRotation = 2;
+
 
 	decision_i_end_point:;
 }
